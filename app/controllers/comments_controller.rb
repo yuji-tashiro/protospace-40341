@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
 
     if @comment.content.blank?
       redirect_to prototype_path(@prototype)
-    elseif @comment.save
+    elsif @comment.save
       redirect_to prototype_path(@comment.prototype), notice: 'コメントが投稿されました。'
     else
       render :"prototypes/show", status: :unprocessable_entity
