@@ -4,7 +4,10 @@ class CommentsController < ApplicationController
     @prototype = Prototype.find(params[:prototype_id])# 追加: 詳細ページに戻るために必要
     @comments = @prototype.comments # 追加: 詳細ページで表示するために必要
 
-    if @comment.save
+
+    if @comment.content.blank?
+      redirect_to prototype_path(@prototype)
+    elseif @comment.save
       redirect_to prototype_path(@comment.prototype), notice: 'コメントが投稿されました。'
     else
       render :"prototypes/show", status: :unprocessable_entity
